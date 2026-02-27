@@ -1,0 +1,6 @@
+import cv2
+img = cv2.imread("C:/Users/sybil/Pictures/ScreenshotsScreenshot 2026-02-27 150221.png")
+blur = cv2.GaussianBlur(img, (5, 5), 0)
+cv2.imshow("Gaussian Blur", blur)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
