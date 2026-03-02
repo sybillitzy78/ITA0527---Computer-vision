@@ -1,0 +1,45 @@
+import cv2
+video_path = "C:/Users/sybil/Downloads/17853291-uhd_3840_2160_30fps.mp4"
+cap_normal = cv2.VideoCapture(video_path)
+cap_slow = cv2.VideoCapture(video_path)
+cap_fast = cv2.VideoCapture(video_path)
+
+if not cap_normal.isOpened():
+    print("Error: Cannot open video")
+    exit()
+slow_counter = 0
+slow_frame = None
+
+while True:
+
+    ret_n, frame_n = cap_normal.read()
+    if not ret_n:
+        break
+    frame_n = cv2.resize(frame_n, (500, 300))
+
+    if slow_counter % 5 == 0:
+        ret_s, slow_frame = cap_slow.read()
+        if not ret_s:
+            break
+        slow_frame = cv2.resize(slow_frame, (500, 300))
+
+    slow_counter += 1
+    ret_f, frame_f = cap_fast.read()
+    if not ret_f:
+        break
+    for _ in range(4):
+        cap_fast.read()
+
+    frame_f = cv2.resize(frame_f, (500, 300))
+
+    cv2.imshow("Normal Video", frame_n)
+    cv2.imshow("Slow Motion Video", slow_frame)
+    cv2.imshow("Fast Motion Video", frame_f)
+
+    if cv2.waitKey(30) & 0xFF == ord('q'):
+        break
+
+cap_normal.release()
+cap_slow.release()
+cap_fast.release()
+cv2.destroyAllWindows()
