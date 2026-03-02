@@ -1,0 +1,9 @@
+import cv2
+
+img = cv2.imread("C:/Users/sybil/Pictures/Screenshots/Screenshot 2026-03-02 155740.png")
+rotated = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+cv2.imshow("Original Image", img)
+cv2.imshow("90 Degree Clockwise Rotated Image", rotated)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
