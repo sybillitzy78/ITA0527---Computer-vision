@@ -1,0 +1,19 @@
+import cv2
+img = cv2.imread(r"C:\Users\sybil\Pictures\Screenshots\Screenshot 2026-03-11 154210.png")
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+print("Number of faces detected:", len(faces))
+output = img.copy()
+for (x, y, w, h) in faces:
+    cv2.rectangle(output, (x, y), (x+w, y+h), (0,255,0), 2)
+
+img = cv2.resize(img,(500,400))
+output = cv2.resize(output,(500,400))
+
+combined = cv2.hconcat([img, output])
+
+cv2.imshow("Input Image | Face Detection", combined)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
