@@ -1,0 +1,25 @@
+import cv2
+
+cap = cv2.VideoCapture(r"C:\Users\sybil\Downloads\8120207-hd_1080_1920_25fps.mp4")
+
+frame_count = 0
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    frame_count += 1
+    print("Processing Frame:", frame_count)
+
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    frame = cv2.resize(frame, (700,500))
+
+    cv2.imshow("Video Frame", frame)
+
+    if cv2.waitKey(30) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
