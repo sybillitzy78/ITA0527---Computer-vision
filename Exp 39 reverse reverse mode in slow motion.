@@ -1,0 +1,20 @@
+import cv2
+cap = cv2.VideoCapture(r"C:/Users/sybil/Downloads/4836342-hd_1080_1920_30fps.mp4")
+frames = []
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+    frames.append(frame)
+
+cap.release()
+
+for i in range(len(frames)-1, -1, -1):
+    frame = frames[i]
+
+    cv2.imshow("Reverse Slow Motion Video", frame)
+
+    if cv2.waitKey(80) & 0xFF == ord('q'):
+        break
+
+cv2.destroyAllWindows()
